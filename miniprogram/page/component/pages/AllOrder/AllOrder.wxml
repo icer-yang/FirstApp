@@ -36,7 +36,7 @@
     </view>
     <button bindtap="onQuery">查询</button>
     <view class="page-section" wx:if="{{result.length>0}}">
-      <view wx:for="{{result}}" wx:key="idx" wx:for-item="itemName">
+      <view wx:for="{{result}}" wx:for-index="idx" wx:for-item="itemName">
         {{idx+1}}: {{itemName.name}} | {{itemName.date}}
       </view>
     </view>

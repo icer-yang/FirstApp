@@ -13,7 +13,7 @@ Page({
         id: 'form',
         name: '近期订单',
         open: false,
-        pages: ['text', 'icon', 'progress']
+        pages: ['初版未开发完成，等待继续']
       }
     ] 
   },
