@@ -1,0 +1,82 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+    
+
+<view class="container">
+  <template is="head" data="{{title: '设置套餐'}}"/>
+  <view class='page-body-wrapper'>{{appdata.dateString}}</view>
+  <!-- <view class="userinfo">
+    <button 
+      class="userinfo-avatar"
+      style="background-image: url({{appdata.avatarUrl}})"
+    ></button>
+    <!-- <view>
+      <button class="userinfo-nickname">{{appdata.userInfo.nickName}}</button>
+    </view> -->
+    <!-- <view>
+      <button class="userinfo-nickname">{{appdata.name}}</button>
+    </view>
+    <view>
+      <button class="userinfo-nickname">{{appdata.department}}</button>
+    </view>
+    <view>
+      <button class="userinfo-nickname">{{appdata.phoneNum}}</button>
+    </view>
+  </view> -->
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="page-body">
+
+    <view class="page-section page-section-gap">
+      <view class="weui-cells__title">A套餐</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="A" placeholder="请输入A套餐内容" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="weui-cells__title">B套餐</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="B" placeholder="请输入B套餐内容" />
+        </view>
+      </view>
+    </view>
+    <view class="page-section page-section-gap">
+      <view class="weui-cells__title">C套餐</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="C" placeholder="请输入C套餐内容" />
+        </view>
+      </view>
+    </view>
+
+    <!-- <view class="page-section page-section-gap">
+      <view class="page-section-title">请选择套餐</view>
+      <radio-group name="order" bindchange="radioChange">
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd"><radio value="A"/></view>
+          <view class="weui-cell__bd">A套餐：{{A}}</view>
+        </label>
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd"><radio value="B"/></view>
+          <view class="weui-cell__bd">B套餐：{{B}}</view>
+        </label>
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd"><radio value="C"/></view>
+          <view class="weui-cell__bd">C套餐：{{C}}</view>
+        </label>
+      </radio-group>
+    </view>
+   -->
+  <!-- 此处是body结尾 -->
+  </view>
+  <view class="btn-area">
+    <button type="primary" formType="submit">提交信息</button>
+    <!-- <button formType="reset">重置</button> -->
+  </view>
+</form>
+
+  <template is="foot" />
+</view>
+

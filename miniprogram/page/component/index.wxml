@@ -1,0 +1,53 @@
+<view class="index">
+  <view class="index-hd">
+    <image class="index-logo" src="resources/kind/logo.png"></image>
+    <view class="index-desc">DRAC研发楼订餐专用小程序，方便大家使用</view>
+  </view>
+
+  <!-- 用户 openid -->
+  <!-- <view class="userinfo">
+    <button
+      class="userinfo-avatar"
+      style="background-image: url({{appdata.avatarUrl}})"
+    ></button>
+    <view>
+      <button class="userinfo-nickname">{{appdata.userInfo.nickName}}</button>
+    </view>
+    
+  </view> -->
+  <view class='page-body-wrapper'>{{appdata.dateString}}</view>
+  <view class="userinfo">
+    <button 
+      class="userinfo-avatar"
+      style="background-image: url({{appdata.avatarUrl}})"
+    ></button>
+    <view>
+      <button class="userinfo-nickname">{{appdata.userInfo.nickName}}</button>
+    </view>
+    <view>
+      <button class="userinfo-nickname">{{appdata.name}}</button>
+    </view>
+    <view>
+      <button class="userinfo-nickname">{{appdata.department}}</button>
+    </view>
+    <!-- <view>
+      <button class="userinfo-nickname">{{appdata.phoneNum}}</button>
+    </view> -->
+  </view>
+  <view class="page-body">
+    <view class="btn-area">
+      <navigator url="/page/component/pages/register/register" redirect hover-class="navigator-hover">
+        <button type="default">首次登陆补充信息</button>
+      </navigator>
+      <navigator url="/page/component/pages/bookDinner/bookDinner" hover-class="other-navigator-hover">
+        <button type="default">订餐</button>
+      </navigator>
+      <navigator url="/page/component/pages/setDinner/setDinner" hover-class="other-navigator-hover">
+        <button type="default">设置餐饮</button>
+      </navigator>
+      <navigator url="/page/component/pages/AllOrder/AllOrder" hover-class="other-navigator-hover">
+        <button type="default">查看所有</button>
+      </navigator>
+    </view>
+  </view>
+</view>

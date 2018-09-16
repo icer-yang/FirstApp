@@ -1,0 +1,63 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+    
+
+<view class="container">
+  <template is="head" data="{{title: '首次注册'}}"/>
+
+  <view class="userinfo">
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button>
+    <view>
+      <button class="userinfo-nickname" open-type='openSetting'>{{userInfo.nickName}}</button>
+    </view>
+  </view>
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="weui-cells__title">姓名，取餐的唯一标识</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" name="name" placeholder-style="color:#F76260" placeholder="{{name}}" />
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title">所在部门</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">当前选择</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker bindchange="bindPickerChange" name="department" value="{{index}}" range="{{array}}">
+              <view class="weui-input">{{array[index]}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="weui-cells__title">手机号，以便有问题联系</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <input class="weui-input" type="number" maxlength="11" name="phoneNum" placeholder="{{phoneNum}}" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-area">
+    <button type="primary" formType="submit">提交信息</button>
+    <button formType="reset">重置</button>
+  </view>
+</form>
+
+  <template is="foot" />
+</view>

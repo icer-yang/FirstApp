@@ -1,0 +1,45 @@
+{
+  "cloud": true,
+  "pages": [
+    "page/component/index",
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "page/API/index",
+    "page/component/pages/register/register",
+    "page/component/pages/bookDinner/bookDinner",
+    "page/component/pages/setDinner/setDinner",
+    "page/component/pages/AllOrder/AllOrder"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "DRAC订餐小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "page/component/index",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "page/API/index",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "接口"
+      }
+    ]
+  }
+}

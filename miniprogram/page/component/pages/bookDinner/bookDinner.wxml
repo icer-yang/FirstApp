@@ -1,0 +1,56 @@
+<import src="../../../common/head.wxml" />
+<import src="../../../common/foot.wxml" />
+    
+
+<view class="container">
+  <template is="head" data="{{title: '订餐'}}"/>
+  <view class='page-body-wrapper'>{{appdata.dateString}}</view>
+  <view class="userinfo">
+    <button 
+      class="userinfo-avatar"
+      style="background-image: url({{appdata.avatarUrl}})"
+    ></button>
+    <!-- <view>
+      <button class="userinfo-nickname">{{appdata.userInfo.nickName}}</button>
+    </view> -->
+    <view>
+      <button class="userinfo-nickname">{{appdata.name}}</button>
+    </view>
+    <view>
+      <button class="userinfo-nickname">{{appdata.department}}</button>
+    </view>
+    <view>
+      <button class="userinfo-nickname">{{appdata.phoneNum}}</button>
+    </view>
+  </view>
+<form catchsubmit="formSubmit" catchreset="formReset">
+  <view class="page-body">
+    <view class="page-section page-section-gap">
+      <view class="page-section-title">请选择套餐(无法自行取消订单，请确定后再提交）</view>
+      <radio-group name="order" bindchange="radioChange">
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd"><radio value="A"/></view>
+          <view class="weui-cell__bd">A：{{A}}</view>
+        </label>
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd"><radio value="B"/></view>
+          <view class="weui-cell__bd">B：{{B}}</view>
+        </label>
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd"><radio value="C"/></view>
+          <view class="weui-cell__bd">C：{{C}}</view>
+        </label>
+      </radio-group>
+    </view>
+  
+  <!-- 此处是body结尾 -->
+  </view>
+  <view class="btn-area">
+    <button type="primary" formType="submit" wx:if="{{!!hasOrdered}}">提交信息</button>
+    <!-- <button formType="reset">重置</button> -->
+  </view>
+</form>
+
+  <template is="foot" />
+</view>
+
