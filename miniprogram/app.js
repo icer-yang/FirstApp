@@ -1,4 +1,6 @@
 //app.js
+var util = require('/util/util.js')
+
 App({
   onLaunch: function () {
     
@@ -21,8 +23,10 @@ App({
       department: wx.getStorageSync('department'),
 
       // 下面是跟随定义
-      dateString: new Date().toLocaleDateString(),
-      todayhasOrder:""
+      dateString: util.getYMD(),
+      todayhasOrder:"",
+      // startOpen: util.startOpen(10, 30)
+      startOpen: true
     }
   }
 })

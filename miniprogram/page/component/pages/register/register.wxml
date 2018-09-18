@@ -22,7 +22,7 @@
       <view class="weui-cells__title">姓名，取餐的唯一标识</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
-          <input class="weui-input" name="name" placeholder-style="color:#F76260" placeholder="{{name}}" />
+          <input class="weui-input" name="name" placeholder-style="color:#F76260" value="{{name}}" />
         </view>
       </view>
     </view>
@@ -47,7 +47,7 @@
       <view class="weui-cells__title">手机号，以便有问题联系</view>
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
-          <input class="weui-input" type="number" maxlength="11" name="phoneNum" placeholder="{{phoneNum}}" />
+          <input class="weui-input" type="number" maxlength="11" name="phoneNum" value="{{phoneNum}}" />
         </view>
       </view>
     </view>

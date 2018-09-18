@@ -13,6 +13,14 @@
   width: 86rpx;
   height: 86rpx;
 }
+.index-logoRenault {
+  width: 120rpx;
+  height: 90rpx;
+}
+.index-logoRenault1 {
+  width: 259rpx;
+  height: 87rpx;
+}
 .index-desc {
   margin-top: 20rpx;
   color: #888888;

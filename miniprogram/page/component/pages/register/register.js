@@ -28,7 +28,7 @@ Page({
   onLoad: function () {
     if (!wx.cloud) {
       wx.redirectTo({
-        url: '/miniprogram/pages/chooseLib/chooseLib',
+        url: '/pages/chooseLib/chooseLib',
       })
       return
     }

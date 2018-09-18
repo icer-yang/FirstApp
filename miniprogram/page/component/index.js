@@ -1,3 +1,4 @@
+var util = require('../../util/util.js')
 const app = getApp()
 
 Page({
@@ -10,14 +11,16 @@ Page({
   onLoad: function () {
     if (!wx.cloud) {
       wx.redirectTo({
-        url: '/miniprogram/pages/chooseLib/chooseLib',
+        url: '/pages/chooseLib/chooseLib',
       })
       return
     }
-
+    app.globalData.startOpen = util.startOpen(24, 60)
     this.setData({
       appdata: app.globalData
     })
+
+
   }
 
 })
