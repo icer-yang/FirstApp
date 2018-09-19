@@ -15,7 +15,8 @@ Page({
     openid: '',
     name:'',
     phoneNum:'',
-    department:''
+    department:'',
+    isManager:false
     // appdata: app.globalData
   },
   bindPickerChange: function (e) {
@@ -43,7 +44,8 @@ Page({
       openid: wx.getStorageSync('openid'),
       name: wx.getStorageSync('name'),
       phoneNum: wx.getStorageSync('phoneNum'),
-      department: wx.getStorageSync('department')
+      department: wx.getStorageSync('department'),
+      // isManager:wx.getStorageSync('isManager')
     })
     // 获取用户信息
     wx.getSetting({
@@ -108,6 +110,7 @@ Page({
     wx.setStorageSync("name", e.detail.value.name),
     wx.setStorageSync("department", this.data.array[e.detail.value.department]),
     wx.setStorageSync("phoneNum", e.detail.value.phoneNum)
+    wx.setStorageSync("isManager", false)
 
     app.globalData = {
       avatarUrl: (!wx.getStorageSync('myAvatarUrl') ? '/pages/index/user-unlogin.png' : wx.getStorageSync('myAvatarUrl')),
@@ -117,40 +120,40 @@ Page({
       openid: wx.getStorageSync('openid'),
       name: wx.getStorageSync('name'),
       phoneNum: wx.getStorageSync('phoneNum'),
-      department: wx.getStorageSync('department')
+      department: wx.getStorageSync('department'),
+      isManager:wx.getStorageSync('isManager')
     }
 // 测试阶段不用上传时暂时关闭
-//     const db = wx.cloud.database()
-//     db.collection('Users').add({
-//       data: {
-//         nickName: wx.getStorageSync('myUserInfo').nickName,
-//         brand: wx.getStorageSync('brand'),
-//         model: wx.getStorageSync('model'),
-//         name: wx.getStorageSync('name'),
-//         phoneNum: wx.getStorageSync('phoneNum'),
-//         department: wx.getStorageSync('department')
-//       },
-//       success: res => {
-//         // 在返回结果中会包含新创建的记录的 _id
-//         wx.showToast({
-//           title: '新增记录成功',
-//         })
-//       },
-//       fail: err => {
-//         wx.showToast({
-//           icon: 'none',
-//           title: '新增记录失败'
-//         })
-//       }
-//     })
+    const db = wx.cloud.database()
+    db.collection('Users').add({
+      data: {
+        nickName: wx.getStorageSync('myUserInfo').nickName,
+        brand: wx.getStorageSync('brand'),
+        model: wx.getStorageSync('model'),
+        name: wx.getStorageSync('name'),
+        phoneNum: wx.getStorageSync('phoneNum'),
+        department: wx.getStorageSync('department'),
+        isManager:wx.getStorageSync('isManager')
+      },
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        wx.showToast({
+          title: '新增记录成功',
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '新增记录失败'
+        })
+      }
+    })
     wx.switchTab({
       url: '/page/component/index'
     })
   },
   formReset: function (e) {
     console.log('form发生了reset事件，携带数据为：', e.detail.value)
-    this.setData({
-      chosen: ''
-    })
+
   }
 })

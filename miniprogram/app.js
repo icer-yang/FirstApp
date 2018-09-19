@@ -21,6 +21,7 @@ App({
       name: wx.getStorageSync('name'),
       phoneNum: wx.getStorageSync('phoneNum'),
       department: wx.getStorageSync('department'),
+      isManager:wx.getStorageSync('isManager'),
 
       // 下面是跟随定义
       dateString: util.getYMD(),

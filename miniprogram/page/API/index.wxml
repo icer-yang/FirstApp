@@ -8,6 +8,8 @@
     <button 
       class="userinfo-avatar"
       style="background-image: url({{appdata.avatarUrl}})"
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
     ></button>
     <!-- <view>
       <button class="userinfo-nickname">{{appdata.userInfo.nickName}}</button>
@@ -36,7 +38,7 @@
               <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="*item">
                 <view class="navigator">
                   <view class="navigator-text">{{page}}</view>
-                  <!-- <view class="navigator-arrow"></view> -->
+                  <view class="navigator-arrow"></view>
                 </view>
               </block>
             </view>

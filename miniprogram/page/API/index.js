@@ -79,6 +79,50 @@ Page({
       })
     }
   },
+// 从网上拉取帐户信息并保存
+  onGetUserInfo: function (e) {
+    if (!this.logged && e.detail.userInfo) {
+      this.setData({
+        logged: true,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        userInfo: e.detail.userInfo
+      })
+      wx.setStorageSync("myAvatarUrl", e.detail.userInfo.avatarUrl)
+      wx.setStorageSync("myUserInfo", e.detail.userInfo)
+    }
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        console.log('[云函数] [login] user openid: ', res.result.openid)
+        app.globalData.openid = res.result.openid
+        wx.setStorageSync("openid", res.result.openid)
+      },
+      fail: err => {
+        console.error('[云函数] [login] 调用失败', err)
+      }
+    })
+    const db = wx.cloud.database()
+    db.collection('Users').where({
+      _openid: app.globalData.openid
+    })
+      .get({
+        success: res => {
+          wx.setStorageSync('name', res.data[0].name)
+          app.globalData.name = res.data[0].name
+          wx.setStorageSync('department', res.data[0].department)
+          app.globalData.department = res.data[0].department
+          wx.setStorageSync('phoneNum', res.data[0].phoneNum)
+          app.globalData.phoneNum = res.data[0].phoneNum
+          wx.setStorageSync('isManager', res.data[0].isManager)
+          app.globalData.isManager = res.data[0].isManager
+        }
+      })
+    
+    // this.onload()
+  },
+
+
 
   kindToggle: function (e) {
     var id = e.currentTarget.id, list = this.data.list;
@@ -95,6 +139,10 @@ Page({
   },
 
   onPullDownRefresh:function(){
+    wx.showToast({
+      title: '正刷新订餐信息',
+      icon: 'loading'
+    })
     // 获取今日本人订单
     const db = wx.cloud.database()
     db.collection('DinnerOrders').where({
