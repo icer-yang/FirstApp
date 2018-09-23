@@ -7,61 +7,55 @@ Page({
       {
         id: 'view',
         name: '今日订餐',
-        open: true,
-        pages: ["还没有查询到您的订餐",]
+        open: false,
+        pages: [{ 'content': "还没有查询到您的订餐",'id': '', 'hasGot': true},],
       }, {
         id: 'form',
         name: '近期订单',
         open: false,
-        pages: ['初版未开发完成，等待继续']
+        pages: [{ 'content': "还没有查询到您的订餐", 'id': '', 'hasGot': true },]
       }
-    ] 
+    ],
   },
 
   onLoad: function () {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '/pages/chooseLib/chooseLib',
-      })
-      return
-    }
-    // 获取今日本人订单
-    const db = wx.cloud.database()
-    db.collection('DinnerOrders').where({
-      _openid: app.globalData.openid,
-      dateString: app.globalData.dateString
-    })
-      .get({
-        success: res => {
-          // res.data 是包含以上定义的两条记录的数组
-          if (res.data.length > 0 ) {
-            this.data.list[0].pages =[]
-            for (let val of res.data) {
-              this.data.list[0].pages.push(val.dateString+'|'+val.todayOrder+':'+val.todayOrderDetail)
-              // this.data.list[0].pages.push("rr")
-            };
-            app.globalData.todayhasOrder = true
-            this.setData({
-              list: this.data.list
-            })
-          }
-          // console.log(res.data)
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '出错了'
-          })
-        }
-      })
+    // if (!wx.cloud) {
+    //   wx.redirectTo({
+    //     url: '/pages/chooseLib/chooseLib',
+    //   })
+    //   return
+    // }
+// 获取今日本人订单
+    // const db = wx.cloud.database()
+    // db.collection('DinnerOrders').where({
+    //   _openid: app.globalData.openid,
+    //   dateString: app.globalData.dateString
+    // })
+    //   .get({
+    //     success: res => {
+    //       // res.data 是包含以上定义的两条记录的数组
+    //       if (res.data.length > 0 ) {
+    //         this.data.list[0].pages =[]
+    //         for (let val of res.data) {
+    //           this.data.list[0].pages.push(val.dateString+'|'+val.todayOrder+':'+val.todayOrderDetail)
+    //           // this.data.list[0].pages.push("rr")
+    //         };
+    //         app.globalData.todayhasOrder = true
+    //         this.setData({
+    //           list: this.data.list
+    //         })
+    //       }
+    //       // console.log(res.data)
+    //     },
+    //     fail: err => {
+    //       wx.showToast({
+    //         icon: 'none',
+    //         title: '出错了'
+    //       })
+    //     }
+    //   })
 
-
-
-
-    this.setData({
-      appdata: app.globalData
-    })
-
+// 第一次进入时，若没有openid，认为是没有填写基本信息的，所以要进入注册页面
     if (!app.globalData.openid){
       wx.showModal({
         // title: "弹窗标题",
@@ -116,27 +110,31 @@ Page({
           app.globalData.phoneNum = res.data[0].phoneNum
           wx.setStorageSync('isManager', res.data[0].isManager)
           app.globalData.isManager = res.data[0].isManager
+          app.globalData.isUser = res.data[0].isUser
+          wx.setStorageSync('isUser', res.data[0].isUser)
+          this.setData({
+            appdata: app.globalData
+          })
         }
       })
-    
-    // this.onload()
+     
   },
 
 
 
-  kindToggle: function (e) {
-    var id = e.currentTarget.id, list = this.data.list;
-    for (var i = 0, len = list.length; i < len; ++i) {
-      if (list[i].id == id) {
-        list[i].open = !list[i].open
-      } else {
-        list[i].open = false
-      }
-    }
-    this.setData({
-      list: list
-    });
-  },
+  // kindToggle: function (e) {
+  //   var id = e.currentTarget.id, list = this.data.list;
+  //   for (var i = 0, len = list.length; i < len; ++i) {
+  //     if (list[i].id == id) {
+  //       list[i].open = !list[i].open
+  //     } else {
+  //       list[i].open = false
+  //     }
+  //   }
+  //   this.setData({
+  //     list: list
+  //   });
+  // },
 
   onPullDownRefresh:function(){
     wx.showToast({
@@ -156,9 +154,10 @@ Page({
           if (res.data.length > 0) {
             this.data.list[0].pages =[]
             for (let val of res.data) {
-              this.data.list[0].pages.push(val.dateString + '|' + val.todayOrder + ':' + val.todayOrderDetail)
-              // this.data.list[0].pages.push("rr")
+              this.data.list[0].pages.push({'content':val.todayOrder + '|' + val.todayOrderDetail + '|' +(val.hasGot?"已取":"未取"),'id':val._id,'hasGot':val.hasGot})
+
             };
+            // 确定订餐过，在点击订餐时弹窗提示已经订过餐
             app.globalData.todayhasOrder = true
             this.setData({
               list: this.data.list
@@ -174,5 +173,102 @@ Page({
       
         }
       })
+  },
+
+// 点击今日按钮选项调整
+  kindToggle: function (e) {
+    var id = e.currentTarget.id, list = this.data.list;
+    // for (var i = 0, len = list.length; i < len; ++i) {
+      if (id == "view") {
+        list[0].open = !list[0].open
+        const db = wx.cloud.database()
+        db.collection('DinnerOrders').where({
+          _openid: app.globalData.openid,
+          dateString: app.globalData.dateString
+        })
+          .get({
+            success: res => {
+              // res.data 是包含以上定义的两条记录的数组
+              if (res.data.length > 0) {
+                this.data.list[0].pages = []
+                // this.data.list[0].uid = []
+                for (let val of res.data) {
+                  this.data.list[0].pages.push({ 'content': val.todayOrder + '|' + val.todayOrderDetail + '|' + (val.hasGot ? "已取" : "未取"), 'id': val._id, 'hasGot': val.hasGot })
+                  // this.data.list[0].uid.push({ 'id': val._id, 'hasGot': val.hasGot })
+                };
+                app.globalData.todayhasOrder = true
+                this.setData({
+                  list: this.data.list
+                })
+              }
+              // console.log(res.data)
+            },
+            fail: err => {
+              wx.showToast({
+                icon: 'none',
+                title: '出错了'
+              })
+            }
+          })
+      } else if (id == "form"){
+        list[1].open = !list[1].open
+        const db = wx.cloud.database()
+        db.collection('DinnerOrders').where({
+          _openid: app.globalData.openid,
+          // dateString: app.globalData.dateString
+        })
+          .get({
+            success: res => {
+              // res.data 是包含以上定义的两条记录的数组
+              if (res.data.length > 0) {
+                this.data.list[1].pages = []
+                for (let val of res.data) {
+                  this.data.list[1].pages.push({ 'content': val.dateString + '|' + val.todayOrder + '|' + val.todayOrderDetail + '|' + (val.hasGot ? "已取" : "未取")})
+                  // this.data.list[0].pages.push("rr")
+                };
+                app.globalData.todayhasOrder = true
+                this.setData({
+                  list: this.data.list
+                })
+              }
+              // console.log(res.data)
+            },
+            fail: err => {
+              wx.showToast({
+                icon: 'none',
+                title: '出错了'
+              })
+            }
+          })
+      }else {
+        // list[i].open = false
+      }
+    // }
+    this.setData({
+      list: list
+    });
+  },
+
+  getButton:function(e){
+    // console.log(e)
+    const db = wx.cloud.database()
+    db.collection('DinnerOrders').doc(e.target.id).update({
+      data: {
+        hasGot : true
+      },
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        wx.showToast({
+          title: '领取成功',
+        })
+        this.onPullDownRefresh()
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '领取失败'
+        })
+      }
+    })
   }
 })

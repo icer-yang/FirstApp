@@ -32,13 +32,17 @@
           </view>
         </view>
       </view>
-
-    </view>
     <button bindtap="onQuery">查询</button>
-    <view class="page-section" wx:if="{{result.length>0}}">
-      <view wx:for="{{result}}" wx:for-index="idx" wx:for-item="itemName">
-        {{idx+1}}: {{itemName.name}} | {{itemName.date}}
+    
+    
+    <scroll-view scroll-y="true">
+      <view class="page-section" wx:if="{{result.length>0}}">
+        <view class="weui-cell_link">共{{result.length}}条</view>
+        <view wx:for="{{result}}" wx:for-index="idx" wx:for-item="itemName">
+          {{idx+1}}: {{itemName.name}} | {{itemName.date}} | {{itemName.hasGot ? "已取" : "未取"}}
+        </view>
       </view>
+    </scroll-view>
     </view>
   </view>
 

@@ -106,5 +106,7 @@ module.exports = {
   formatTime: formatTime,
   formatLocation: formatLocation,
   getYMD: getYMD,
-  startOpen:startOpen
+  startOpen:startOpen,
+  dateTimeTOString: dateTimeTOString,
+  dateTOString
 }

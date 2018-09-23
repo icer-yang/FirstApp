@@ -16,7 +16,6 @@ Page({
     name:'',
     phoneNum:'',
     department:'',
-    isManager:false
     // appdata: app.globalData
   },
   bindPickerChange: function (e) {
@@ -45,7 +44,6 @@ Page({
       name: wx.getStorageSync('name'),
       phoneNum: wx.getStorageSync('phoneNum'),
       department: wx.getStorageSync('department'),
-      // isManager:wx.getStorageSync('isManager')
     })
     // 获取用户信息
     wx.getSetting({
@@ -111,6 +109,7 @@ Page({
     wx.setStorageSync("department", this.data.array[e.detail.value.department]),
     wx.setStorageSync("phoneNum", e.detail.value.phoneNum)
     wx.setStorageSync("isManager", false)
+    wx.setStorageSync("isUser", true)
 
     app.globalData = {
       avatarUrl: (!wx.getStorageSync('myAvatarUrl') ? '/pages/index/user-unlogin.png' : wx.getStorageSync('myAvatarUrl')),
@@ -121,7 +120,8 @@ Page({
       name: wx.getStorageSync('name'),
       phoneNum: wx.getStorageSync('phoneNum'),
       department: wx.getStorageSync('department'),
-      isManager:wx.getStorageSync('isManager')
+      isManager:wx.getStorageSync('isManager'),
+      isUser: wx.getStorageSync('isUser')
     }
 // 测试阶段不用上传时暂时关闭
     const db = wx.cloud.database()
@@ -133,7 +133,8 @@ Page({
         name: wx.getStorageSync('name'),
         phoneNum: wx.getStorageSync('phoneNum'),
         department: wx.getStorageSync('department'),
-        isManager:wx.getStorageSync('isManager')
+        isManager:wx.getStorageSync('isManager'),
+        isUser: wx.getStorageSync('isUser')
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

@@ -9,18 +9,25 @@ Page({
   },
 
   onLoad: function () {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '/pages/chooseLib/chooseLib',
-      })
-      return
-    }
-    app.globalData.startOpen = util.startOpen(24, 60)
+    // if (!wx.cloud) {
+    //   wx.redirectTo({
+    //     url: '/pages/chooseLib/chooseLib',
+    //   })
+    //   return
+    // }
+    // app.globalData.startOpen = util.startOpen(24, 60)
+    // this.setData({
+    //   appdata: app.globalData
+    // })
+
+
+  },
+
+  onShow : function(){
+    app.globalData.startOpen = (!!app.globalData.openid) && app.globalData.isUser
     this.setData({
       appdata: app.globalData
     })
-
-
   }
 
 })

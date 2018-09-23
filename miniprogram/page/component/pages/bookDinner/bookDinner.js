@@ -1,3 +1,4 @@
+var util = require('../../../../util/util.js')
 const app = getApp()
 
 Page({
@@ -17,7 +18,7 @@ Page({
         content: "今日已订过餐，订餐无法取消",
         showCancel: true,
         confirmText: "返回",
-        cancelText: "我还要订",
+        cancelText: "继续订",
         success: cnf => {
           if (cnf.confirm) {
             wx.switchTab({
@@ -58,6 +59,25 @@ Page({
             C: res.data[0].C,
           })
           console.log(res.data)
+          app.globalData.startOpenTime = util.startOpen(parseInt(res.data[0].StopTime.split(':')[0]), parseInt(res.data[0].StopTime.split(':')[1]))
+
+          if (!app.globalData.startOpenTime) {
+            wx.showModal({
+              // title: "弹窗标题",
+              content: "已过订餐时间",
+              showCancel: false,
+              confirmText: "返回",
+              // cancelText: "继续选",
+              success: cnf => {
+                if (cnf.confirm) {
+                  wx.switchTab({
+                    url: '/page/component/index'
+                  })
+                }
+              },
+            })
+          }
+
         },
         fail: err => {
           wx.showToast({
@@ -67,9 +87,6 @@ Page({
         }
       })
 
-    // this.setData({
-    //   appdata: app.globalData
-    // })
   },
   radioChange: function(e){
     console.log('radio发生change事件，携带value值为：', e.detail.value)
@@ -83,21 +100,22 @@ Page({
     db.collection('DinnerOrders').add({
       data: {
         dateString: app.globalData.dateString,
-        date:new Date(),
+        date: util.dateTimeTOString(new Date()),
         name: app.globalData.name,
         todayOrder: e.detail.value.order,
-        todayOrderDetail: this.data[e.detail.value.order]
+        todayOrderDetail: this.data[e.detail.value.order],
+        hasGot:false
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
         wx.showToast({
-          title: '新增记录成功',
+          title: '订餐成功',
         })
       },
       fail: err => {
         wx.showToast({
           icon: 'none',
-          title: '新增记录失败'
+          title: '订餐失败'
         })
       }
     })

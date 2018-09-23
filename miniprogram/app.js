@@ -13,8 +13,8 @@ App({
     }
 
     this.globalData = {
-      avatarUrl: (!wx.getStorageSync('myAvatarUrl')?'/pages/index/user-unlogin.png':wx.getStorageSync('myAvatarUrl')),
-      userInfo: (!wx.getStorageSync('myUserInfo') ? {"nickName": "您还没有登录，点击下方按钮补充信息" }:wx.getStorageSync('myUserInfo')),
+      avatarUrl: (!wx.getStorageSync('myAvatarUrl')?'/image/user-unlogin.png':wx.getStorageSync('myAvatarUrl')),
+      userInfo: (!wx.getStorageSync('myUserInfo') ? {"nickName": "您还没有登录，需补充基本信息" }:wx.getStorageSync('myUserInfo')),
       brand: wx.getStorageSync('brand'),
       model: wx.getStorageSync('model'),
       openid: wx.getStorageSync('openid'),
@@ -22,12 +22,14 @@ App({
       phoneNum: wx.getStorageSync('phoneNum'),
       department: wx.getStorageSync('department'),
       isManager:wx.getStorageSync('isManager'),
+      isUser: wx.getStorageSync('isUser'),
 
       // 下面是跟随定义
       dateString: util.getYMD(),
       todayhasOrder:"",
       // startOpen: util.startOpen(10, 30)
-      startOpen: true
+      startOpen: true,
+      startOpenTime:true
     }
   }
 })

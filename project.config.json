@@ -6,7 +6,8 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"nodeModules": true
 	},
 	"appid": "wxf789c4d7d677e09a",
 	"projectname": "FirstApp",
@@ -37,5 +38,9 @@
 				}
 			]
 		}
-	}
+	},
+
+  "devDependencies": {
+    "wx-server-sdk": "latest"
+  }
 }

@@ -50,25 +50,20 @@
         </view>
       </view>
     </view>
+    <view class="weui-cells__title">今日截至订餐时间</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">截止时间</view>
+          </view>
+          <view class="weui-cell__bd">
+            <picker mode="time" value="{{time}}" start="08:00" end="11:30" bindchange="bindTimeChange">
+              <view class="weui-input">{{time}}</view>
+            </picker>
+          </view>
+        </view>
+      </view>
 
-    <!-- <view class="page-section page-section-gap">
-      <view class="page-section-title">请选择套餐</view>
-      <radio-group name="order" bindchange="radioChange">
-        <label class="weui-cell weui-check__label">
-          <view class="weui-cell__hd"><radio value="A"/></view>
-          <view class="weui-cell__bd">A套餐：{{A}}</view>
-        </label>
-        <label class="weui-cell weui-check__label">
-          <view class="weui-cell__hd"><radio value="B"/></view>
-          <view class="weui-cell__bd">B套餐：{{B}}</view>
-        </label>
-        <label class="weui-cell weui-check__label">
-          <view class="weui-cell__hd"><radio value="C"/></view>
-          <view class="weui-cell__bd">C套餐：{{C}}</view>
-        </label>
-      </radio-group>
-    </view>
-   -->
   <!-- 此处是body结尾 -->
   </view>
   <view class="btn-area">
