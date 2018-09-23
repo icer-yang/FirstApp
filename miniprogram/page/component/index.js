@@ -24,7 +24,8 @@ Page({
   },
 
   onShow : function(){
-    app.globalData.startOpen = (!!app.globalData.openid) && app.globalData.isUser
+    // app.globalData.startOpen = (!!app.globalData.openid) && app.globalData.isUser
+    app.globalData.startOpen = !!app.globalData.openid
     this.setData({
       appdata: app.globalData
     })

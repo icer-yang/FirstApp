@@ -109,7 +109,7 @@ Page({
     wx.setStorageSync("department", this.data.array[e.detail.value.department]),
     wx.setStorageSync("phoneNum", e.detail.value.phoneNum)
     wx.setStorageSync("isManager", false)
-    wx.setStorageSync("isUser", true)
+    wx.setStorageSync("isUser", false)
 
     app.globalData = {
       avatarUrl: (!wx.getStorageSync('myAvatarUrl') ? '/pages/index/user-unlogin.png' : wx.getStorageSync('myAvatarUrl')),

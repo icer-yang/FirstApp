@@ -48,7 +48,7 @@
       <navigator wx:if="{{appdata.isManager}}" url="/page/component/pages/setDinner/setDinner" hover-class="other-navigator-hover">
         <button type="default">设置餐饮</button>
       </navigator>
-      <navigator wx:if="{{appdata.isUser}}" url="/page/component/pages/AllOrder/AllOrder" hover-class="other-navigator-hover">
+      <navigator url="/page/component/pages/AllOrder/AllOrder" hover-class="other-navigator-hover">
         <button type="default">查看订餐</button>
       </navigator>
       <navigator url="/page/component/pages/about/about" hover-class="other-navigator-hover">

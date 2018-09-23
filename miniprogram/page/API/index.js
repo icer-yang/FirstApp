@@ -18,6 +18,14 @@ Page({
     ],
   },
 
+  clearStorage: function () {
+    wx.clearStorageSync()
+    wx.showToast({
+      icon: 'none',
+      title: '已清除所有缓存'
+    })
+  },
+
   onLoad: function () {
     // if (!wx.cloud) {
     //   wx.redirectTo({
@@ -82,7 +90,9 @@ Page({
         userInfo: e.detail.userInfo
       })
       wx.setStorageSync("myAvatarUrl", e.detail.userInfo.avatarUrl)
+      app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
       wx.setStorageSync("myUserInfo", e.detail.userInfo)
+      app.globalData.userInfo = e.detail.userInfo
     }
     wx.cloud.callFunction({
       name: 'login',

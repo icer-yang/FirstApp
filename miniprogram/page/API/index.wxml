@@ -2,7 +2,7 @@
   <view class="index-hd">
     <!-- <image class="index-logo" src="resources/kind/logo.png"></image> -->
     <image class="index-logoRenault" src="/image/Renault.png"></image>
-    <view class="index-desc">我的订餐信息</view>
+    <view class="index-desc" bindtap='clearStorage'>我的订餐信息</view>
     <view class="index-desc">{{appdata.dateString}}</view>
   </view>
   <view class="userinfo">
