@@ -96,7 +96,7 @@ function startOpen(hh,mm){
   if(hour< hh ){
     return true
   }
-  else if(hour=hh && minu<mm){
+  else if(hour===hh && minu<mm){
     return true
   }else{
     return false
