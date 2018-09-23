@@ -19,7 +19,7 @@
       <button class="userinfo-nickname">{{appdata.name}}</button>
     </view>
     <view>
-      <button class="userinfo-nickname">{{appdata.department}}</button>
+      <button class="userinfo-nickname" open-type='openSetting'>{{appdata.department}}</button>
     </view>
     <view>
       <button class="userinfo-nickname">{{appdata.phoneNum}}</button>

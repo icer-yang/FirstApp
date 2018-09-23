@@ -19,6 +19,7 @@ Page({
     // this.setData({
     //   appdata: app.globalData
     // })
+    wx.showShareMenu()
 
 
   },
