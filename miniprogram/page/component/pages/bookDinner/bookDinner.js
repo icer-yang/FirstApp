@@ -9,27 +9,13 @@ Page({
     C: "",
     hasOrdered:"",
   },
+  onLoad: function(){
+    this.setData({
+      appdata: app.globalData,
+    })
+  },
 
-  onLoad: function () {
-    // 如果已订餐，弹窗
-    if(app.globalData.todayhasOrder){
-      wx.showModal({
-        // title: "弹窗标题",
-        content: "今日已订过餐，订餐无法取消",
-        showCancel: true,
-        confirmText: "返回",
-        cancelText: "继续订",
-        success: cnf => {
-          if (cnf.confirm) {
-            wx.switchTab({
-              url: '/page/API/index'
-            })
-          }
-        },
-      })
-    }
-
-
+  onShow: function () {
     const db = wx.cloud.database()
     db.collection('DinnerMenu').where({
       _id: app.globalData.dateString
@@ -76,7 +62,32 @@ Page({
                 }
               },
             })
+          } // 如果已订餐，弹窗
+          else if (app.globalData.todayhasOrder) {
+            wx.showModal({
+              // title: "弹窗标题",
+              content: "今日已订过餐，还继续么？",
+              showCancel: true,
+              confirmText: "返回",
+              cancelText: "继续订",
+              success: cnf => {
+                if (cnf.confirm) {
+                  wx.switchTab({
+                    url: '/page/API/index'
+                  })
+                }
+              },
+            })
+          } else{
+            wx.showToast({
+              icon: 'none',
+              title: '订餐不能自行取消，请确认后再提交'
+            })
           }
+
+
+
+
 
         },
         fail: err => {

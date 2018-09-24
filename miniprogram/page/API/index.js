@@ -234,9 +234,8 @@ Page({
                 this.data.list[1].pages = []
                 for (let val of res.data) {
                   this.data.list[1].pages.push({ 'content': val.dateString + '|' + val.todayOrder + '|' + val.todayOrderDetail + '|' + (val.hasGot ? "已取" : "未取")})
-                  // this.data.list[0].pages.push("rr")
                 };
-                app.globalData.todayhasOrder = true
+                // app.globalData.todayhasOrder = true
                 this.setData({
                   list: this.data.list
                 })

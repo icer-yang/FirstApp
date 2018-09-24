@@ -42,7 +42,7 @@
                   <button wx:if="{{item.id=='view'}}">领取</button>
                 </view>
               </block> -->
-              <block wx:for="{{item.pages}}" wx:for-item="page" wx:for-index="pageIndex">
+              <block wx:for="{{item.pages}}" wx:for-item="page" wx:key="*item">
                 <view class="navigator">
                   <view class="navigator-text">{{page.content}}</view>
                   <!-- <button wx:if="{{item.id=='view' && !list.uid[index].hasGot}}" id="{{list.uid[index].id}}" bindtap="getButton">领取</button> -->
